@@ -132,10 +132,10 @@ func (mc *sphinxqlConn) readInitPacket() (err error) {
 		// which is not documented but seems to work.
 		mc.cipher = append(mc.cipher, data[pos:pos+12]...)
 
-		if data[len(data)-1] == 0 {
-			return
-		}
-		return errMalformPkt
+		// if data[len(data)-1] == 0 {
+		return
+		// }
+		// return errMalformPkt
 	}
 
 	return
@@ -318,12 +318,12 @@ func (mc *sphinxqlConn) readResultSetHeaderPacket() (int, error) {
 		}
 
 		// column count
-		num, _, n := readLengthEncodedInteger(data)
-		if n-len(data) == 0 {
-			return int(num), nil
-		}
+		num, _, _ := readLengthEncodedInteger(data)
+		// if n-len(data) == 0 {
+		return int(num), nil
+		// }
 
-		return 0, errMalformPkt
+		// return 0, errMalformPkt
 	}
 	return 0, err
 }
